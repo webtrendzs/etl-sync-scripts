@@ -6,3 +6,11 @@ body {
 a {
   color: #00B7FF;
 }
+
+.ui.container {
+    width: 800px;
+}
+
+.ui.placeholder.segment .column .field, .ui.placeholder.segment .column textarea {
+    max-width: none;
+}

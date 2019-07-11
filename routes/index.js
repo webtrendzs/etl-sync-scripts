@@ -1,11 +1,16 @@
 var express = require('express');
 var router = express.Router();
+let BuildHivSummary = require('../app/build-hiv-summary');
+let ScheduleHivSummary = require('../app/schedule-hiv-summary');
+let Moment = require('moment');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	let BuildHivSummary = require('../app/build-hiv-summary');
-	let ScheduleHivSummary = require('../app/schedule-hiv-summary');
-	let Moment = require('moment');
+	res.render('index', { title: 'Patient summaries recovery', build_started: false });
+});
+
+router.post('/', function(req, res, next) {
+	
 	try {
 		let buildJob = new BuildHivSummary();
 		let startedAt = Moment();
@@ -22,10 +27,9 @@ router.get('/', function(req, res, next) {
 	} catch (error) {
 		console.error('Error running pipeline', error);
 	}
-	
 	process.stdin.resume();
 	
-	res.render('index', { title: 'Express' });
+	res.render('index', { title: 'Build Process Started', build_started: true });
 });
 
 module.exports = router;

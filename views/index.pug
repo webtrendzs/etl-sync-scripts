@@ -1,5 +1,37 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  .main.ui.container
+      h2.ui.center.aligned.icon.header
+          i.circular.icon
+            img(src="images/logo.png" width="78")
+          | #{title}
+      if !build_started
+          .ui.placeholder.segment
+              .ui.two.column.stackable.center.aligned.grid
+                  .ui.vertical.divider Or
+                  .middle.aligned.row
+                      .column
+                          .ui.icon.header
+                              i.clone.icon
+                              | Start build process
+                          .inline
+                              form.ui.form(method="post", url="/", enctype="multipart/form-data")
+                                  input(type="hidden" name="build" value="start")
+                                  .ui.primary.button(type="submit") Build
+                      .column
+                          .ui.icon.header
+                              i.clone.outline.icon
+                              | Start sync process
+                          .inline
+                              form.ui.form
+                                  input(type="hidden" name="build" value="sync")
+                                  .ui.positive.button(type="submit") Sync
+
+      else
+          .ui.placeholder.segment
+              .ui.icon.header
+                  i.search.icon
+                  #{title}
+              .inline
+                  p Build/Sync process started

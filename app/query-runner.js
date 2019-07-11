@@ -2,7 +2,7 @@ let mysql = require('mysql');
 
 let config = require('./config.js');
 
-let cleanup = require('./cleanup')
+let cleanup = require('./cleanup');
 
 class QueryRunner {
 

@@ -1,0 +1,46 @@
+extends layout
+
+block content
+    .main.ui.container
+        h2.ui.center.aligned.icon.header
+            i.circular.icon
+                img(src="../images/logo.png" width="78")
+            | #{title}
+        if !build_started
+            .ui.placeholder.segment
+                .ui.info.icon.message
+                    i.circle.info.icon
+                    .content
+                        .header
+                            | Please note:
+                        if partial
+                            p
+                                | This window will build
+                                strong  ONLY
+                                |  flat HIV summary and appointments for the patient(s)
+                        else
+                            p
+                                | This window will build the patient(s) summary data right from flat obs all the way to flat HIV summary and appointments
+                .ui.two.column.stackable.center.aligned.grid
+                    .middle.aligned.row
+                        .column
+                            .ui.icon.header
+                                i.clone.icon
+                                | Enter comma separated list of patient IDs
+                            .inline
+                                - var url = partial ? '/build/partial' : '/build/full';
+                                form.ui.form(method="post", url="#{url}", enctype="multipart/form-data")
+                                    if partial
+                                        input(type="hidden" name="build" value="partial")
+                                    else
+                                        input(type="hidden" name="build" value="full")
+                                    .field
+                                        textarea(cols="60" rows="4" name="patient_ids")
+                                    .ui.primary.button(type="submit") Build
+        else
+            .ui.placeholder.segment
+                .ui.icon.header
+                    i.search.icon
+                    #{title}
+                .inline
+                    p Build/Sync process started
