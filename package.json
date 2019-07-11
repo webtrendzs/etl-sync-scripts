@@ -1,23 +1,31 @@
 {
   "name": "etl-sync-scripts",
   "version": "0.1.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Rebuild patients whenever there is a big queue",
+  "main": "app/index.js",
   "directories": {
     "example": "examples",
     "lib": "lib",
     "test": "test"
   },
   "dependencies": {
+    "async": "^3.1.0",
     "chai": "^4.2.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
     "moment": "^2.24.0",
-    "mysql": "^2.16.0"
+    "morgan": "~1.9.1",
+    "mysql": "^2.16.0",
+    "pug": "2.0.4"
   },
   "devDependencies": {
     "mocha": "^5.2.0"
   },
   "scripts": {
-    "test": "make test"
+    "test": "make test",
+    "start": "node ./bin/www"
   },
   "repository": {
     "type": "git",

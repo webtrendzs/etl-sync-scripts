@@ -1,0 +1,9 @@
+{
+  "apps" : [{
+    "name"        : "etl-scripts-recovery",
+    "script"      : "/opt/etl/script-recovery/bin/www",
+    "watch"       : false,
+    "exec_interpreter" : "babel-node",
+    "exec_mode"        : "fork"
+  }]
+}

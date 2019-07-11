@@ -1,8 +1,8 @@
 let config = {
   host    : 'localhost',
-  user    : 'admin',
-  password: 'admin',
-  database: 'test'
+  user    : 'root',
+  password: '',
+  database: 'test_etl'
 };
 
  
