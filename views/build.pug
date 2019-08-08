@@ -8,7 +8,7 @@ block content
             | #{title}
         if !build_started
             .ui.placeholder.segment
-                .ui.info.icon.message
+                .ui.violet.icon.message
                     i.circle.info.icon
                     .content
                         .header
@@ -28,19 +28,22 @@ block content
                                 i.clone.icon
                                 | Enter comma separated list of patient IDs
                             .inline
-                                - var url = partial ? '/build/partial' : '/build/full';
-                                form.ui.form(method="post", url="#{url}", enctype="multipart/form-data")
-                                    if partial
+                                if partial
+                                    form.ui.form(method="post", action="/build/partial", enctype="multipart/form-data")
                                         input(type="hidden" name="build" value="partial")
-                                    else
+                                        .field
+                                            textarea(cols="60" rows="4" name="patient_ids")
+                                        button.ui.primary.button(type="submit") Build
+                                else
+                                    form.ui.form(method="post", action="/build/full", enctype="multipart/form-data")
                                         input(type="hidden" name="build" value="full")
-                                    .field
-                                        textarea(cols="60" rows="4" name="patient_ids")
-                                    .ui.primary.button(type="submit") Build
+                                        .field
+                                            textarea(cols="60" rows="4" name="patient_ids")
+                                        button.ui.primary.button(type="submit") Build
         else
             .ui.placeholder.segment
-                .ui.icon.header
-                    i.search.icon
-                    #{title}
-                .inline
-                    p Build/Sync process started
+                .ui.active.inverted.dimmer
+                    .ui.large.text.loader Build/Sync process started
+                p
+                p
+                p

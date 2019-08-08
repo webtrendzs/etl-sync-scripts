@@ -13,8 +13,7 @@ class BuildHivSummary {
 		return new Promise((resolve, reject) => {
 			let sql = `select count(*) as items_in_queue from flat_hiv_summary_build_queue`;
 			
-			queryRunner.runQuery(sql)
-				.then((result) => {
+			queryRunner.runQuery(sql).then((result) => {
 					let items = result.results[0].items_in_queue;
 					console.log('Items in queue:' + items);
 					

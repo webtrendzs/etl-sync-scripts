@@ -1,8 +1,29 @@
 doctype html
 html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/semantic.min.css')
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    block content
+    head
+        title= title
+        link(rel='stylesheet', href='/stylesheets/semantic.min.css')
+        link(rel='stylesheet', href='/stylesheets/style.css')
+        script(src='/js/socket.io.min.js')
+        script(src='/js/jquery-3.4.1.min.js')
+        script.
+            var socket = io();
+            $(document).on('click', '#build button', function (e) {
+                e.preventDefault(); // prevents page reloading
+                $.post(window.location.href, {buildType: $('#buildType').val()}, function (res) {
+                    if(res.build_started) {
+                        $("#cols").toggle();
+                        $(".shell-wrap").toggle();
+                    }
+                });
+                return false;
+            });
+            socket.on('log', function (msg) {
+                console.log(msg);
+                $(".shell-body li").each(function() {
+                    $(this).removeClass('active');
+                });
+                $('.shell-body').append($('<li class="active">').text(msg));
+            });
+    body
+        block content
